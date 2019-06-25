@@ -10,16 +10,17 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :exnoops, key: :value
+#   config :exnoops, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:exnoops, :key)
+#   Application.get_env(:exnoops, :key)
 #
 # You can also configure a third-party app:
 #
-#     config :logger, level: :info
-#
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
@@ -27,4 +28,4 @@ use Mix.Config
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-#     import_config "#{Mix.env()}.exs"
+#   import_config "#{Mix.env()}.exs"
