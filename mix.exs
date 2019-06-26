@@ -10,7 +10,9 @@ defmodule Exnoops.MixProject do
       deps: deps(),
       package: package(),
       docs: [extras: ["README.md"]],
-      description: description()
+      description: description(),
+      name: "exNoops",
+      source_url: "https://gitlab.com/bfcarpio/exnoops"
     ]
   end
 
