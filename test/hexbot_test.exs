@@ -3,6 +3,6 @@ defmodule Exnoops.HexbotTest do
   doctest Exnoops
 
   test "get_color()" do
-    assert Exnoops.Hexbot.get_color() == "#18453B"
+    assert Exnoops.Hexbot.get_color() == {:ok, [%{"value" => "#18453B"}]}
   end
 end
