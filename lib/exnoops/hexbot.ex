@@ -1,6 +1,8 @@
 defmodule Exnoops.Hexbot do
   @moduledoc """
   Module to interact with Github's Noop: Hexbot
+
+  See the [official `noop` documentation](https://noopschallenge.com/challenges/hexbot) for API information including the accepted parameters.
   """
 
   require Logger
@@ -13,10 +15,6 @@ defmodule Exnoops.Hexbot do
 
   + Parameters are sent with a keyword list into the function.
   + Parameters that accept multiple values should be put into the keyword list like `{:key, [value1, value2]}`. See example below.
-
-  See the [official `noop` documentation](https://noopschallenge.com/challenges/hexbot) for API information including the accepted parameters.
-
-  Returns a tuple with `{:ok, response}` or `{:error, message}`
 
   ## Examples
 
