@@ -35,8 +35,10 @@ defmodule Exnoops.Base do
   defp handle_response({:ok, %Mojito.Response{status_code: 200, body: body}}),
     do: {:ok, JSON.decode!(body)}
 
+  defp handle_response({:ok, %Mojito.Response{status_code: 404}}), do: {:error, 404}
+
   defp handle_response({:ok, %Mojito.Response{status_code: _status_code, body: body}}),
     do: {:error, JSON.decode!(body)}
 
-  defp handle_response({:error, struct}), do: {:error, "There was an error", struct}
+  defp handle_response({:error, struct}), do: {:error, struct}
 end

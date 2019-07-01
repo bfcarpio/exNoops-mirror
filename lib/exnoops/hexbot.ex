@@ -35,11 +35,11 @@ defmodule Exnoops.Hexbot do
 
   """
   @spec get_color(keyword()) :: {atom(), list()}
-  def get_color(opts \\ []) do
+  def get_color(opts \\ []) when is_list(opts) do
     Logger.debug("Calling Hexbot.get_color()")
 
     case get("/" <> @noop, opts) do
-      {:ok, res} -> {:ok, Map.fetch!(res, "colors")}
+      {:ok, %{"colors" => value}} -> {:ok, value}
       _ -> {:error, "An error occurred"}
     end
   end
