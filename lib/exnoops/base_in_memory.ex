@@ -17,6 +17,98 @@ defmodule Exnoops.BaseInMemory do
              %{"value" => "#FF8433"}
            ]
          }}
+
+      {"/drumbot/patterns", []} ->
+        {:ok,
+         [
+           %{"name" => "oontza"},
+           %{"name" => "bossanoopa"},
+           %{"name" => "nipnop"},
+           %{"name" => "botthisway"},
+           %{"name" => "funkee"},
+           %{"name" => "shlojam"},
+           %{"name" => "botorik"},
+           %{"name" => "swoop"},
+           %{"name" => "schmaltz"},
+           %{"name" => "bouncy"}
+         ]}
+
+      {"/drumbot/patterns/nipnop", []} ->
+        {:ok,
+         %{
+           "name" => "nipnop",
+           "beatsPerMinute" => 92,
+           "stepCount" => 16,
+           "tracks" => [
+             %{
+               "instrument" => "snare",
+               "steps" => [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+             },
+             %{
+               "instrument" => "clap",
+               "steps" => [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+             },
+             %{
+               "instrument" => "cowbell",
+               "steps" => [0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0]
+             },
+             %{
+               "instrument" => "kick",
+               "steps" => [1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+             }
+           ]
+         }}
+
+      {"/drumbot/patterns/oontza", []} ->
+        {:ok,
+         %{
+           "beatsPerMinute" => 110,
+           "name" => "oontza",
+           "stepCount" => 16,
+           "tracks" => [
+             %{
+               "instrument" => "hihat",
+               "steps" => [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1]
+             },
+             %{
+               "instrument" => "snare",
+               "steps" => [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+             },
+             %{
+               "instrument" => "kick",
+               "steps" => [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+             }
+           ]
+         }}
+
+      {"/drumbot/patterns/botorik", []} ->
+        {:ok,
+         %{
+           "beatsPerMinute" => 120,
+           "name" => "botorik",
+           "stepCount" => 16,
+           "tracks" => [
+             %{
+               "instrument" => "hihat",
+               "steps" => [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+             },
+             %{
+               "instrument" => "snare",
+               "steps" => [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+             },
+             %{
+               "instrument" => "kick",
+               "steps" => [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0]
+             },
+             %{
+               "instrument" => "cowbell",
+               "steps" => [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+             }
+           ]
+         }}
+
+      {"/drumbot/patterns/NotAPattern", []} ->
+        {:error, 404}
     end
   end
 end
