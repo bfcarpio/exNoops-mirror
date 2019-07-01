@@ -1,0 +1,29 @@
+image: elixir:1.9.0-alpine
+
+variables:
+  MIX_ENV: "test"
+
+cache:
+  paths:
+    - _build
+    - deps
+
+before_script:
+  - mix local.hex --force
+  - mix local.rebar --force
+
+compile:
+  stage: build
+  script:
+    - mix deps.get --only test
+    - mix compile --warnings-as-errors
+
+test:
+  stage: test
+  script:
+    - mix test
+
+lint:
+  stage: test
+  script:
+    - mix format --check-formatted
