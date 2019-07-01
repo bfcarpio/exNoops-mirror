@@ -1,5 +1,9 @@
 # Exnoops
 
+
+[![pipeline status](https://gitlab.com/bfcarpio/exnoops/badges/master/pipeline.svg)](https://gitlab.com/bfcarpio/exnoops/commits/master)
+
+
 **TODO: Add description**
 
 ## Installation
