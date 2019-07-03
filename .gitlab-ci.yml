@@ -1,8 +1,5 @@
 image: elixir:1.9.0-alpine
 
-variables:
-  MIX_ENV: "test"
-
 cache:
   paths:
     - _build
@@ -27,3 +24,14 @@ lint:
   stage: test
   script:
     - mix format --check-formatted
+
+pages:
+  stage: deploy
+  script:
+  - mix deps.get
+  - mix docs -o public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
