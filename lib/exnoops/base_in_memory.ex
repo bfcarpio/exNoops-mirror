@@ -109,6 +109,34 @@ defmodule Exnoops.BaseInMemory do
 
       {"/drumbot/patterns/NotAPattern", []} ->
         {:error, 404}
+
+      {"/wordbot", []} ->
+        {:ok, %{"words" => ["pepperoni"]}}
+
+      {"/wordbot", [count: 7]} ->
+        {:ok,
+         %{
+           "words" => [
+             "extracorporeal",
+             "behooves",
+             "superregionals",
+             "stepmother",
+             "heckle",
+             "clanks",
+             "hippest"
+           ]
+         }}
+
+      {"/wordbot", [count: 4, set: "dinosaurs"]} ->
+        {:ok,
+         %{
+           "words" => [
+             "Xixiposaurus",
+             "Ischyrosaurus",
+             "Crocodylomorph",
+             "Tatankaceratops"
+           ]
+         }}
     end
   end
 end
