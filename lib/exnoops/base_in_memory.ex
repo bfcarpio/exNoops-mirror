@@ -137,6 +137,47 @@ defmodule Exnoops.BaseInMemory do
              "Tatankaceratops"
            ]
          }}
+
+      {"/fizzbot", []} ->
+        {:ok,
+         %{
+           "message" =>
+             "Thank you for your application to Noops Inc.\n\nOur automated fizzbot interview process will help us determine if you have what it takes to become a Noop.\n\nFor each question, you will GET the question and then give us the answer back to the same URL.\nYou will also find the URL for the next question in the nextQuestion parameter for each response.\n\nThe first question is at https://api.noopschallenge.com/fizzbot/questions/1.\n\nGood Luck\n",
+           "nextQuestion" => "/fizzbot/questions/1"
+         }}
+
+      {"/fizzbot/questions/1", []} ->
+        {:ok,
+         %{
+           "message" =>
+             "What is your favorite programming language?\nMine is COBOL, of course.\nPOST your answer back to this URL in JSON format. If you are having difficulties, see the exampleResponse provided.",
+           "exampleResponse" => %{"answer" => "COBOL"}
+         }}
+
+      {"/fizzbot/questions/1234567", []} ->
+        {:ok,
+         %{
+           "message" =>
+             "What is your favorite programming language?\nMine is COBOL, of course.\nPOST your answer back to this URL in JSON format. If you are having difficulties, see the exampleResponse provided.",
+           "rules" => [
+             %{"number" => 3, "response" => "Fizz"},
+             %{"number" => 5, "response" => "Buzz"}
+           ],
+           "numbers" => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+           "exampleResponse" => %{"answer" => "1 2 Fizz 4 Buzz..."}
+         }}
+    end
+  end
+
+  def post(endpoint, answer) do
+    case {endpoint, answer} do
+      {"/fizzbot/questions/1", %{"answer" => "COBOL"}} ->
+        {:ok,
+         %{
+           "result" => "correct",
+           "message" => "Of course. How interesting. Are you ready for your first REAL question?",
+           "nextQuestion" => "/fizzbot/questions/1234567"
+         }}
     end
   end
 end

@@ -40,8 +40,8 @@ defmodule Exnoops.Drumbot do
       {:ok, [_h | _t] = res} ->
         {:ok, Enum.map(res, fn %{"name" => value} -> value end)}
 
-      _ ->
-        {:error, "An error occurred"}
+      error ->
+        error
     end
   end
 
@@ -76,7 +76,7 @@ defmodule Exnoops.Drumbot do
          ]
        }}
   """
-  @spec get_pattern(String.t()) :: {atom(), keyword()}
+  @spec get_pattern(String.t()) :: {atom(), map()}
   def get_pattern(pattern) when is_binary(pattern) do
     Logger.debug("Calling Drumbot.get_pattern()")
 
@@ -84,8 +84,8 @@ defmodule Exnoops.Drumbot do
       {:ok, %{"name" => ^pattern} = res} ->
         {:ok, res}
 
-      default ->
-        default
+      error ->
+        error
     end
   end
 end
