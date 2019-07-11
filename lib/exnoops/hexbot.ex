@@ -40,7 +40,7 @@ defmodule Exnoops.Hexbot do
 
     case get("/" <> @noop, opts) do
       {:ok, %{"colors" => value}} -> {:ok, value}
-      _ -> {:error, "An error occurred"}
+      error -> error
     end
   end
 end

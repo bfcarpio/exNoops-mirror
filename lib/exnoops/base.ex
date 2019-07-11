@@ -14,9 +14,14 @@ defmodule Exnoops.Base do
     |> handle_response
   end
 
-  # @spec post(String.t(), keyword()) :: {atom(), term()}
-  # def post(endpoint, opts) do
-  # end
+  @spec post(String.t(), keyword()) :: {atom(), term()}
+  def post(endpoint, body) do
+    path = @base_url <> endpoint
+    Logger.debug("Performing POST request on #{path}")
+
+    Mojito.request(:post, path, _headers = [], JSON.encode!(body), _mint_opts = [])
+    |> handle_response
+  end
 
   @spec format_opts(list()) :: String.t()
   defp format_opts([]), do: ""

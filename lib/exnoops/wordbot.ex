@@ -36,8 +36,8 @@ defmodule Exnoops.Wordbot do
       iex> Exnoops.Wordbot.get_word([count: 4, set: "dinosaurs"])
       {:ok,
         [
-            "Xixiposaurus",
-            "Ischyrosaurus",
+          "Xixiposaurus",
+          "Ischyrosaurus",
           "Crocodylomorph",
           "Tatankaceratops"
         ]
@@ -49,7 +49,7 @@ defmodule Exnoops.Wordbot do
 
     case get("/" <> @noop, opts) do
       {:ok, %{"words" => value}} -> {:ok, value}
-      default -> default
+      error -> error
     end
   end
 end
