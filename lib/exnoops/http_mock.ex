@@ -213,6 +213,54 @@ defmodule Exnoops.API.HttpMock do
           "numbers": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ],
           "exampleResponse": { "answer": "1 2 Fizz 4 Buzz..." }
         }>)
+
+      "/vexbot" ->
+        mock_mojito(200, ~S<{
+          "vectors": [
+            {
+              "a": {
+                "x": 743,
+                "y": 147
+              },
+              "b": {
+                "x": 60,
+                "y": 601
+              },
+              "speed": 71
+            }
+          ]
+        }>)
+
+      "/vexbot?error=true" ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
+      "/vexbot?count=2" ->
+        mock_mojito(200, ~S/{
+          "vectors": [
+            {
+              "a": {
+                "x": 743,
+                "y": 147
+              },
+              "b": {
+                "x": 60,
+                "y": 601
+              },
+              "speed": 71
+            },
+            {
+              "a": {
+                "x": 12,
+                "y": 34
+              },
+              "b": {
+                "x": 56,
+                "y": 78
+              },
+              "speed": 90
+            }]}/)
     end
   end
 
