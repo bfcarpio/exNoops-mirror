@@ -12,7 +12,8 @@ defmodule Exnoops.MixProject do
       docs: [extras: ["README.md"]],
       description: description(),
       name: "exNoops",
-      source_url: "https://gitlab.com/bfcarpio/exnoops"
+      source_url: "https://gitlab.com/bfcarpio/exnoops",
+      test_coverage: [summary: [threshold: 80]]
     ]
   end
 
@@ -20,7 +21,7 @@ defmodule Exnoops.MixProject do
 
   def package do
     [
-      name: :exnoop,
+      name: :exnoops,
       maintainers: ["Brendan Carpio"],
       licenses: ["MIT"],
       docs: [extras: ["README.md"]],

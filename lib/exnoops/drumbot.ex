@@ -6,7 +6,7 @@ defmodule Exnoops.Drumbot do
   """
 
   require Logger
-  use Exnoops.API
+  import Exnoops.API
 
   @noop "drumbot"
 

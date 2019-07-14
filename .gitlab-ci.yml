@@ -18,7 +18,7 @@ compile:
 test:
   stage: test
   script:
-    - mix test
+    - mix test --cover
 
 lint:
   stage: test
