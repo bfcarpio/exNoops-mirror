@@ -6,12 +6,12 @@ defmodule Exnoops.Wordbot do
   """
 
   require Logger
-  use Exnoops.API
+  import Exnoops.API
 
   @noop "wordbot"
 
   @doc """
-  Query Hexbot for word(s)
+  Query Wordbot for word(s)
 
   + Parameters are sent with a keyword list into the function
 
@@ -48,6 +48,58 @@ defmodule Exnoops.Wordbot do
     Logger.debug("Calling Wordbot.get_word()")
 
     case get("/" <> @noop, opts) do
+      {:ok, %{"words" => value}} -> {:ok, value}
+      error -> error
+    end
+  end
+
+  @doc """
+  Query Wordbot for word sets
+
+  ## Examples
+
+      iex> Exnoops.Wordbot.get_word_sets()
+      {:ok,
+        [
+          "adjectives",
+          "adverbs",
+          "all",
+          "animals",
+          "cats",
+          "common",
+          "default",
+          "dinosaurs",
+          "dogs",
+          "encouragement",
+          "fabrics",
+          "flowers",
+          "fruits",
+          "gemstones",
+          "genres",
+          "horses",
+          "instruments",
+          "knots",
+          "menu",
+          "metals",
+          "moods",
+          "nouns",
+          "objects",
+          "occupations",
+          "prepositions",
+          "rhymeless",
+          "sports",
+          "vegetables",
+          "verbs",
+          "verbs_past",
+          "weather",
+          "wrestlers"
+        ]}
+  """
+  @spec get_word_sets() :: {atom(), list()}
+  def get_word_sets() do
+    Logger.debug("Calling Wordbot.get_word_sets()")
+
+    case get("/" <> @noop <> "/sets", []) do
       {:ok, %{"words" => value}} -> {:ok, value}
       error -> error
     end

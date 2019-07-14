@@ -6,7 +6,7 @@ defmodule Exnoops.Hexbot do
   """
 
   require Logger
-  use Exnoops.API
+  import Exnoops.API
 
   @noop "hexbot"
 

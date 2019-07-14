@@ -8,3 +8,7 @@ use Mix.Config
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :exnoops,
+  http: Exnoops.API.HttpMock,
+  base_url: ""

@@ -6,7 +6,7 @@ defmodule Exnoops.Fizzbot do
   """
 
   require Logger
-  use Exnoops.API
+  import Exnoops.API
 
   @noop "fizzbot"
 
@@ -38,7 +38,7 @@ defmodule Exnoops.Fizzbot do
       iex> Exnoops.Fizzbot.ask_question(1234567)
       {:ok,
         %{
-          "message" => "What is your favorite programming language?\nMine is COBOL, of course.\nPOST your answer back to this URL in JSON format. If you are having difficulties, see the exampleResponse provided.",
+          "message" => "FizzBuzz is the name of the game.\nHere's a list of numbers.\nSend me back a string as follows:\nFor each number:\nIf it is divisible by 3, print \"Fizz\".\nIf it is divisible by 5, print \"Buzz\".\nIf it is divisible by 3 and 5, print \"FizzBuzz\".\nOtherwise, print the number.\n\nEach entry in the string should be separated by a space.\n\nFor example, if the numbers are [1, 2, 3, 4, 5], you would send back:\n\n{\n  \"answer\": \"1 2 Fizz 4 Buzz\"\n}\n",
           "rules" => [
             %{ "number" => 3, "response" => "Fizz" },
             %{ "number" => 5, "response" => "Buzz" }
@@ -79,7 +79,7 @@ defmodule Exnoops.Fizzbot do
     Logger.debug("Calling Fizzbot.answer_question(#{question_id})")
 
     case post("/" <> @noop <> "/questions/#{question_id}", answer) do
-      {:ok, %{"result" => "correct"}} = res -> res
+      {:ok, %{"result" => _}} = res -> res
       error -> error
     end
   end
