@@ -261,6 +261,53 @@ defmodule Exnoops.API.HttpMock do
               },
               "speed": 90
             }]}/)
+
+      "/directbot" ->
+        mock_mojito(200, ~S/{
+          "directions": [
+            { "direction": "up", "distance": 96, "speed": 97 }
+          ]
+        }/)
+
+      "/directbot?count=5" ->
+        mock_mojito(200, ~S/{
+          "directions": [
+            { "direction": "down", "distance": 73, "speed": 58 },
+            { "direction": "right", "distance": 58, "speed": 69 },
+            { "direction": "down", "distance": 42, "speed": 12 },
+            { "direction": "right", "distance": 51, "speed": 84 },
+            { "direction": "down", "distance": 35, "speed": 14 }
+          ]
+        }/)
+
+      "/directbot?count=5&speed=5&distance=10" ->
+        mock_mojito(200, ~S/{
+          "directions": [
+            { "direction": "left", "distance": 10, "speed": 2 },
+            { "direction": "down", "distance": 10, "speed": 2 },
+            { "direction": "right", "distance": 10, "speed": 2 },
+            { "direction": "down", "distance": 10, "speed": 1 },
+            { "direction": "up", "distance": 10, "speed": 4 }
+          ]
+        }/)
+
+      "/directbot?count=1&connected=1" ->
+        mock_mojito(200, ~S/{
+        "directions": [
+          {
+            "coordinates": {
+              "a": { "x": 84, "y": 609 },
+              "b": { "x": 91, "y": 609 }
+            },
+            "direction": "up",
+            "distance": 32,
+            "speed": 6
+          }]}/)
+
+      "/directbot?error=true" ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
     end
   end
 
