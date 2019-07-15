@@ -7,6 +7,7 @@ defmodule Exnoops.API do
   @http_impl Application.fetch_env!(:exnoops, :http)
 
   defmodule Behaviour do
+    @moduledoc false
     @callback http_get(String.t()) :: {:ok, map()}
     @callback http_post(String.t(), String.t()) :: {:ok, map()}
   end
