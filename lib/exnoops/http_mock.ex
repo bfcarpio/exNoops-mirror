@@ -308,6 +308,24 @@ defmodule Exnoops.API.HttpMock do
         mock_mojito(404, ~S/{
           "message": "The requested resource was not found"
         }/)
+
+      "/polybot" ->
+        mock_mojito(200, ~S/{
+          "polygons": [
+            [
+              {"x":157,"y":998},
+              {"x":145,"y":1000},
+              {"x":122,"y":1000},
+              {"x":106,"y":989},
+              {"x":151,"y":972}
+            ]
+          ]
+        }/)
+
+      "/polybot?error=true" ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
     end
   end
 
