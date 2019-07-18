@@ -397,6 +397,38 @@ defmodule Exnoops.API.HttpMock do
         mock_mojito(404, ~S/{
           "message": "The requested resource was not found"
         }/)
+
+      "/riddlebot/start" ->
+        mock_mojito(200, ~S<{
+          "message": "Post your GitHub login to this URL to get started",
+          "exampleResponse": { "login": "noops-challenge" }
+        }>)
+
+      "/riddlebot/riddles/NotARiddle" ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
+      "/riddlebot/riddles/Zsy4sdsCuYrIPwbnw5HOowNvsWcxmh_uo31C8tkN4wU" ->
+        mock_mojito(200, ~S<{
+          "message": "The riddleText is reversed. When you have figured out the answer, post it back as JSON. See the exampleResponse for details.",
+          "riddlePath": "/riddlebot/riddles/Zsy4sdsCuYrIPwbnw5HOowNvsWcxmh_uo31C8tkN4wU",
+          "exampleResponse": { "answer": "ANSWER GOES HERE" },
+          "riddleType": "reverse",
+          "riddleText": "EVIF EERHT OREZ XIS OWT OWT NEVES RUOF EVIF THGIE TA KCAB EM LLAC ESAELP TOBHTAP SI TI OLLEH"
+        }>)
+
+      "/riddlebot/certificate/NotACertificate" ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
+      "/riddlebot/certificate/613oBeHRK_2BzTZ8YgRwxEN-hBxrD1ZOnRspvSuJ4hJks8svZvSBynJ09sOdoFQM" ->
+        mock_mojito(200, ~S<{
+          "message": "This certifies that your-login-here completed the Riddlebot challenge.",
+          "elapsed": 1928,
+          "completed": "2019-06-24T22:11:39.231Z"
+        }>)
     end
   end
 
@@ -443,6 +475,28 @@ defmodule Exnoops.API.HttpMock do
         mock_mojito(404, ~S/{
           "message": "The requested resource was not found"
         }/)
+
+      {"/riddlebot/start", "{\"login\":\"NotAChallenger\"}"} ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
+      {"/riddlebot/start", "{\"login\":\"noop-challenger\"}"} ->
+        mock_mojito(200, ~S<{
+          "message": "Hello from Riddlebot. Get the first riddle at the provided riddlePath",
+          "riddlePath": "/riddlebot/riddles/Zsy4sdsCuYrIPwbnw5HOowNvsWcxmh_uo31C8tkN4wU"
+        }>)
+
+      {"/riddlebot/riddles/NotARiddle", "{\"answer\":\"...\"}"} ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
+      {"/riddlebot/riddles/Zsy4sdsCuYrIPwbnw5HOowNvsWcxmh_uo31C8tkN4wU", "{\"answer\":\"...\"}"} ->
+        mock_mojito(200, ~S<{
+          "result": "correct",
+          "nextRiddlePath": "/riddlebot/riddles/4LpseM7Yg8_wB0sX50eWCtQLPtassehfrZwjMSGhKLk"
+        }>)
     end
   end
 end
