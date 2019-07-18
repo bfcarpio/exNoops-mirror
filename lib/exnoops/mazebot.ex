@@ -93,7 +93,7 @@ defmodule Exnoops.Mazebot do
         "exampleSolution" => %{ "directions" => "ENWNNENWNNS"  }
       }}
   """
-  @spec get_race(binary()) :: {atom(), map()}
+  @spec get_race(String.t()) :: {atom(), map()}
   def get_race(path) when is_binary(path) do
     Logger.debug("Calling Mazebot.get_race()")
 
@@ -145,7 +145,7 @@ defmodule Exnoops.Mazebot do
     iex> Exnoops.Mazebot.submit_maze("/mazebot/mazes/17pSAsql1EEaCvEe28UnAQ", "ESS")
     {:ok, {:error, %{"message" => "Hit a wall at directions[1]", "result" => "failed"}}}
   """
-  @spec submit_maze(binary(), binary()) :: {atom(), {atom(), map()}}
+  @spec submit_maze(String.t(), String.t()) :: {atom(), {atom(), map()}}
   def submit_maze(path, directions) when is_binary(path) and is_binary(directions) do
     Logger.debug("Calling Mazebot.submit_maze()")
 
