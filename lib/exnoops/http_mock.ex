@@ -415,6 +415,17 @@ defmodule Exnoops.API.HttpMock do
           "message": "The requested resource was not found"
         }/)
 
+      {"/mazebot/race/start", "{\"login\":\"yourgithubloginhere\"}"} ->
+        mock_mojito(200, ~S<{
+          "message": "Start your engines!",
+          "nextMaze": "/mazebot/race/iEGpDT1I0qFzGU81yb49JY3Srj1daT70P6e-Zr6bpR0"
+        }>)
+
+      {"/mazebot/race/start", "{\"login\":\"NotAName\"}"} ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
       {"/mazebot/mazes/dTXurZOonsCbWC9_PDBWpiRAvBME3VBDIf9hcwwCdNc",
        "{\"directions\":\"ENNNN....\"}"} ->
         mock_mojito(200, ~S<{

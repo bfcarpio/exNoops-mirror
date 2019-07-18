@@ -10,6 +10,10 @@ defmodule Exnoops.MazebotTest do
     assert Exnoops.Mazebot.get_race("/mazebot/NotRealPath") == {:error, 404}
   end
 
+  test "start_race 404" do
+    assert Exnoops.Mazebot.start_race("NotAName") == {:error, 404}
+  end
+
   test "submit_maze 404" do
     assert Exnoops.Mazebot.submit_maze("/mazebot/NotRealPath", "ESS") == {:error, 404}
   end
