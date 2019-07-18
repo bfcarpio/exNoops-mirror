@@ -326,6 +326,77 @@ defmodule Exnoops.API.HttpMock do
         mock_mojito(404, ~S/{
           "message": "The requested resource was not found"
         }/)
+
+      "/mazebot/random" ->
+        mock_mojito(200, ~S<{
+          "name": "Maze #236 (10x10)",
+          "mazePath": "/mazebot/mazes/ikTcNQMwKhux3bWjV3SSYKfyaVHcL0FXsvbwVGk5ns8",
+          "startingPosition": [ 4, 3 ],
+          "endingPosition": [ 3, 6 ],
+          "message": "When you have figured out the solution, post it back to this url. See the exampleSolution for more information.",
+          "exampleSolution": { "directions": "ENWNNENWNNS" },
+          "map": [
+            [ " ", " ", "X", " ", " ", " ", "X", " ", "X", "X" ],
+            [ " ", "X", " ", " ", " ", " ", " ", " ", " ", " " ],
+            [ " ", "X", " ", "X", "X", "X", "X", "X", "X", " " ],
+            [ " ", "X", " ", " ", "A", " ", " ", " ", "X", " " ],
+            [ " ", "X", "X", "X", "X", "X", "X", "X", " ", " " ],
+            [ "X", " ", " ", " ", "X", " ", " ", " ", "X", " " ],
+            [ " ", " ", "X", "B", "X", " ", "X", " ", "X", " " ],
+            [ " ", " ", "X", " ", "X", " ", "X", " ", " ", " " ],
+            [ "X", " ", "X", "X", "X", "X", "X", " ", "X", "X" ],
+            [ "X", " ", " ", " ", " ", " ", " ", " ", "X", "X" ]
+          ]
+        }>)
+
+      "/mazebot/random?minSize=10&maxSize=20" ->
+        mock_mojito(200, ~S<{
+        "name": "Maze #142 (10x10)",
+        "mazePath": "/mazebot/mazes/dTXurZOonsCbWC9_PDBWpiRAvBME3VBDIf9hcwwCdNc",
+        "startingPosition": [ 9, 3  ],
+        "endingPosition": [ 7, 0  ],
+        "message": "When you have figured out the solution, post it back to this url. See the exampleSolution for more information.",
+        "exampleSolution": { "directions": "ENWNNENWNNS"  },
+        "map": [
+            [ "X", " ", " ", " ", " ", " ", "X", "B", " ", " "  ],
+            [ " ", " ", " ", " ", "X", " ", " ", " ", "X", " "  ],
+            [ " ", "X", "X", "X", " ", "X", "X", "X", " ", "X"  ],
+            [ " ", " ", " ", " ", "X", " ", " ", "X", " ", "A"  ],
+            [ " ", "X", "X", "X", " ", "X", " ", "X", " ", " "  ],
+            [ " ", " ", " ", "X", " ", "X", " ", "X", " ", " "  ],
+            [ " ", "X", " ", "X", " ", "X", " ", "X", " ", "X"  ],
+            [ " ", " ", " ", "X", " ", "X", " ", "X", " ", " "  ],
+            [ "X", " ", "X", "X", " ", " ", " ", " ", " ", " "  ],
+            [ "X", " ", " ", " ", " ", "X", " ", " ", " ", "X"  ]
+          ]
+      }>)
+
+      "/mazebot/race/Fh5Kt7l9gMQr41GvWkmoCg" ->
+        mock_mojito(200, ~S<{
+          "name": "Mazebot 500 Stage#1 (5x5)",
+          "mazePath": "/mazebot/race/Fh5Kt7l9gMQr41GvWkmoCg",
+          "map": [
+            [ "A", " ", " ", " ", " " ],
+            [ " ", "X", "X", "X", " " ],
+            [ " ", " ", "X", " ", " " ],
+            [ "X", " ", "X", "B", "X" ],
+            [ "X", " ", " ", " ", "X" ]
+          ],
+          "message": "When you have figured out the solution, post it back to this url in JSON format. See the exampleSolution for more information.",
+          "startingPosition": [ 0, 0 ],
+          "endingPosition": [ 3, 3 ],
+          "exampleSolution": { "directions": "ENWNNENWNNS" }
+        }>)
+
+      "/mazebot/random?error=true" ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
+      "/mazebot/NotRealPath" ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
     end
   end
 
@@ -340,6 +411,24 @@ defmodule Exnoops.API.HttpMock do
          }>)
 
       {"/fizzbot/questions/987654321", "{\"answer\":\"COBOl\"}"} ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
+      {"/mazebot/mazes/dTXurZOonsCbWC9_PDBWpiRAvBME3VBDIf9hcwwCdNc",
+       "{\"directions\":\"ENNNN....\"}"} ->
+        mock_mojito(200, ~S<{
+          "result": "success",
+          "message": "You solved it in 0.029 seconds with 56 steps, the shortest possible solution.",
+          "shortestSolutionLength": 56,
+          "yourSolutionLength": 56,
+          "elapsed": 29
+        }>)
+
+      {"/mazebot/mazes/17pSAsql1EEaCvEe28UnAQ", "{\"directions\":\"ESS\"}"} ->
+        mock_mojito(200, ~S<{ "message": "Hit a wall at directions[1]", "result": "failed" }>)
+
+      {"/mazebot/NotRealPath", "{\"directions\":\"ESS\"}"} ->
         mock_mojito(404, ~S/{
           "message": "The requested resource was not found"
         }/)
