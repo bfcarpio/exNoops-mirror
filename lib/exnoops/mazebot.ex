@@ -103,6 +103,27 @@ defmodule Exnoops.Mazebot do
     end
   end
 
+  @doc """
+  Starts a maze race with Mazebot
+
+  ## Examples
+
+      iex> Exnoops.Mazebot.start_race("yourgithubloginhere")
+      {:ok, %{
+        "message" => "Start your engines!",
+        "nextMaze" => "/mazebot/race/iEGpDT1I0qFzGU81yb49JY3Srj1daT70P6e-Zr6bpR0"
+      }}
+  """
+  @spec start_race(binary()) :: {atom(), map()}
+  def start_race(username) when is_binary(username) do
+    Logger.debug("Calling Mazebot.start_race(#{username})")
+
+    case post("/mazebot/race/start", %{"login" => username}) do
+      {:ok, _} = res -> res
+      error -> error
+    end
+  end
+
   @doc ~S"""
   Submits an answer to a race
 
