@@ -434,6 +434,27 @@ defmodule Exnoops.API.HttpMock do
         mock_mojito(200, ~S<{
           "message": "Hello there, welcome to the Sortbot. Get started at /sortbot/exam"
         }>)
+
+      "/interviewbot/start" ->
+        mock_mojito(200, ~S<{
+          "message": "Welcome to your interview. Please POST your GitHub login to this URL to get started. See the exampleResponse for more information.",
+          "exampleResponse": { "login": "noops-challenger" }
+        }>)
+
+      "/interviewbot/NotAPath" ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
+      "/interviewbot/questions/izZhyS2sCY7kZtZJf8yjizYuMo7zLE0m4Ucom4NeJYc" ->
+        mock_mojito(200, ~S<{
+            "questionPath": "/interviewbot/questions/izZhyS2sCY7kZtZJf8yjizYuMo7zLE0m4Ucom4NeJYc",
+            "question": 12111900247,
+            "message": "Find the prime factors of the number 12111900247. The prime factors of a number are the prime numbers that result in the number when multiplied together. The prime factors of 12 would be [2,2,3] because 2 * 2 * 3 = 12.",
+            "exampleResponse": {
+              "answer": [ 2, 3, 5, 7 ]
+            }
+          }>)
     end
   end
 
@@ -551,9 +572,20 @@ defmodule Exnoops.API.HttpMock do
         }>)
 
       {"/sortbot/NotAPath", "{\"error\":\"...\"}"} ->
-        mock_mojito(404, ~S<mock_mojito(404, ~S/{
+        mock_mojito(404, ~S/{
           "message": "The requested resource was not found"
-        }/)>)
+        }/)
+
+      {"/interviewbot/NotAPath", "{\"login\":\"...\"}"} ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
+      {"/interviewbot/start", "{\"login\":\"noops-challenger\"}"} ->
+        mock_mojito(200, ~S<{
+          "message": "Hello noops-challenger, get ready for your interview. Your first question is at /interviewbot/questions/izZhyS2sCY7kZtZJf8yjizYuMo7zLE0m4Ucom4NeJYc",
+          "nextQuestion": "/interviewbot/questions/izZhyS2sCY7kZtZJf8yjizYuMo7zLE0m4Ucom4NeJYc"
+        }>)
     end
   end
 end
