@@ -455,6 +455,116 @@ defmodule Exnoops.API.HttpMock do
               "answer": [ 2, 3, 5, 7 ]
             }
           }>)
+
+      "/chartbot?type=pie" ->
+        mock_mojito(200, ~S<{
+          "title": "Median Mood",
+          "datasets": [
+            { "name": "enthralled", "value": 1345 },
+            { "name": "supported", "value": 528 },
+            { "name": "not", "value": 748 },
+            { "name": "irritated", "value": 1625 },
+            { "name": "astonished", "value": 418 }
+          ],
+          "type": "pie"
+        }>)
+
+      "/chartbot?type=time" ->
+        mock_mojito(200, ~S<{
+        "title": "Weekly Most Desirable Occupations Report",
+        "interval": "week",
+        "periods": [
+          "2019-04-28",
+          "2019-05-05",
+          "2019-05-12",
+          "2019-05-19",
+          "2019-05-26",
+          "2019-06-02",
+          "2019-06-09",
+          "2019-06-16",
+          "2019-06-23",
+          "2019-06-30"
+        ],
+        "datasets": [
+          {
+            "name": "radiologic technician",
+            "data": [
+              { "period": "2019-04-28", "value": 331 },
+              { "period": "2019-05-05", "value": 332 },
+              { "period": "2019-05-12", "value": 356 },
+              { "period": "2019-05-19", "value": 381 },
+              { "period": "2019-05-26", "value": 373 },
+              { "period": "2019-06-02", "value": 361 },
+              { "period": "2019-06-09", "value": 373 },
+              { "period": "2019-06-16", "value": 368 },
+              { "period": "2019-06-23", "value": 371 },
+              { "period": "2019-06-30", "value": 361 }
+            ]
+          },
+          {
+            "name": "choreographer",
+            "data": [
+              { "period": "2019-04-28", "value": 355 },
+              { "period": "2019-05-05", "value": 413 },
+              { "period": "2019-05-12", "value": 464 },
+              { "period": "2019-05-19", "value": 498 },
+              { "period": "2019-05-26", "value": 495 },
+              { "period": "2019-06-02", "value": 534 },
+              { "period": "2019-06-09", "value": 539 },
+              { "period": "2019-06-16", "value": 516 },
+              { "period": "2019-06-23", "value": 477 },
+              { "period": "2019-06-30", "value": 429 }
+            ]
+          },
+          {
+            "name": "paperhanger",
+            "data": [
+              { "period": "2019-04-28", "value": 193 },
+              { "period": "2019-05-05", "value": 170 },
+              { "period": "2019-05-12", "value": 152 },
+              { "period": "2019-05-19", "value": 151 },
+              { "period": "2019-05-26", "value": 145 },
+              { "period": "2019-06-02", "value": 144 },
+              { "period": "2019-06-09", "value": 145 },
+              { "period": "2019-06-16", "value": 148 },
+              { "period": "2019-06-23", "value": 150 },
+              { "period": "2019-06-30", "value": 141 }
+            ]
+          },
+          {
+            "name": "printing press operator",
+            "data": [
+              { "period": "2019-04-28", "value": 199 },
+              { "period": "2019-05-05", "value": 224 },
+              { "period": "2019-05-12", "value": 228 },
+              { "period": "2019-05-19", "value": 246 },
+              { "period": "2019-05-26", "value": 262 },
+              { "period": "2019-06-02", "value": 286 },
+              { "period": "2019-06-09", "value": 311 },
+              { "period": "2019-06-16", "value": 344 },
+              { "period": "2019-06-23", "value": 346 },
+              { "period": "2019-06-30", "value": 363 }
+            ]
+          }
+        ],
+        "type": "time"
+      }>)
+
+      "/chartbot" ->
+        mock_mojito(200, ~S<{
+        "title": "Performance By Region",
+        "datasets": [
+          { "name": "El Monte, California", "value": 901 },
+          { "name": "South Bend, Indiana", "value": 352 },
+          { "name": "Lawrence, Indiana", "value": 913 }
+        ],
+        "type": "pie"
+      }>)
+
+      "/chartbot?type=error" ->
+        mock_mojito(404, ~S/{
+            "message": "The requested resource was not found"
+          }/)
     end
   end
 

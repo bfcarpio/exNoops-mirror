@@ -19,16 +19,16 @@ defmodule Exnoops.Hexbot do
   ## Examples
 
       iex> Exnoops.Hexbot.get_color()
-      {:ok, [%{"value" => "#18453B"}]}
+      {:ok, ["#18453B"]}
 
       iex> Exnoops.Hexbot.get_color([count: 5, seed: ["FF7F50", "FFD700", "FF8C00"]])
       {:ok,
         [
-         %{"value" => "#FFBB19"},
-         %{"value" => "#FF8A0E"},
-         %{"value" => "#FF8628"},
-         %{"value" => "#FF9E00"},
-         %{"value" => "#FF8433"}
+          "#FFBB19",
+          "#FF8A0E",
+          "#FF8628",
+          "#FF9E00",
+          "#FF8433"
         ]
       }
 
@@ -39,8 +39,11 @@ defmodule Exnoops.Hexbot do
     Logger.debug("Calling Hexbot.get_color()")
 
     case get("/" <> @noop, opts) do
-      {:ok, %{"colors" => value}} -> {:ok, value}
-      error -> error
+      {:ok, %{"colors" => values}} ->
+        {:ok, for(%{"value" => value} <- values, do: value)}
+
+      error ->
+        error
     end
   end
 end

@@ -38,7 +38,7 @@ defmodule Exnoops.Drumbot do
 
     case get("/" <> @noop <> "/patterns", []) do
       {:ok, [_h | _t] = res} ->
-        {:ok, Enum.map(res, fn %{"name" => value} -> value end)}
+        {:ok, for(%{"name" => value} <- res, do: value)}
 
       error ->
         error

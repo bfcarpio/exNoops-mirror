@@ -29,15 +29,16 @@ defmodule Exnoops.Vexbot do
     Logger.debug("Calling Hexbot.get_color()")
 
     case get("/" <> @noop, opts) do
-      {:ok, %{"vectors" => value}} ->
+      {:ok, %{"vectors" => vectors}} ->
         {:ok,
-         Enum.map(value, fn %{
-                              "a" => %{"x" => a_x, "y" => a_y},
-                              "b" => %{"x" => b_x, "y" => b_y},
-                              "speed" => speed
-                            } ->
-           {{a_x, a_y}, {b_x, b_y}, speed}
-         end)}
+         for(
+           %{
+             "a" => %{"x" => a_x, "y" => a_y},
+             "b" => %{"x" => b_x, "y" => b_y},
+             "speed" => speed
+           } <- vectors,
+           do: {{a_x, a_y}, {b_x, b_y}, speed}
+         )}
 
       error ->
         error
