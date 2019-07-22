@@ -86,24 +86,26 @@ defmodule Exnoops.Mashbot do
   end
 
   defp mash_handler({"directbot" = noop, data}) do
-    Enum.map(data, fn line_map ->
-      %{
-        "direction" => direction,
-        "distance" => distance,
-        "speed" => speed
-      } = line_map
+    data
+    |> Enum.map(fn vector ->
+      vector
+      |> Enum.map(fn
+        {"coordinates", %{"a" => %{"x" => a_x, "y" => a_y}, "b" => %{"x" => b_x, "y" => b_y}}} ->
+          {"coordinates", {{a_x, a_y}, {b_x, b_y}}}
 
-      coordinates =
-        Map.get(line_map, "coordinates")
-        |> (fn
-              %{"a" => %{"x" => a_x, "y" => a_y}, "b" => %{"x" => b_x, "y" => b_y}} ->
-                {{a_x, a_y}, {b_x, b_y}}
-
-              nil ->
-                nil
-            end).()
-
-      {String.to_atom(direction), distance, speed, coordinates}
+        pair ->
+          pair
+      end)
+      |> Enum.into(%{})
+      |> Map.put_new("coordinates", nil)
+      |> (fn %{
+               "direction" => direction,
+               "distance" => distance,
+               "speed" => speed,
+               "coordinates" => coordinates
+             } ->
+            {String.to_atom(direction), distance, speed, coordinates}
+          end).()
     end)
     |> (fn new_data -> {noop, new_data} end).()
   end
