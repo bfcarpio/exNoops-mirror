@@ -565,6 +565,54 @@ defmodule Exnoops.API.HttpMock do
         mock_mojito(404, ~S/{
             "message": "The requested resource was not found"
           }/)
+
+      "/mashbot" ->
+        mock_mojito(200, ~S<{
+          "hexbot": [
+            { "value": "#E9B104" }
+          ],
+          "directbot": [
+            { "direction": "right", "distance": 58, "speed": 7 }
+          ],
+          "polybot": [
+            [
+              { "x": 823, "y": 349 },
+              { "x": 812, "y": 405 },
+              { "x": 775, "y": 406 },
+              { "x": 748, "y": 407 },
+              { "x": 724, "y": 427 },
+              { "x": 673, "y": 484 },
+              { "x": 656, "y": 454 },
+              { "x": 648, "y": 407 },
+              { "x": 546, "y": 419 },
+              { "x": 604, "y": 370 },
+              { "x": 529, "y": 337 },
+              { "x": 533, "y": 322 },
+              { "x": 552, "y": 276 },
+              { "x": 581, "y": 255 },
+              { "x": 614, "y": 240 },
+              { "x": 653, "y": 222 },
+              { "x": 692, "y": 186 },
+              { "x": 732, "y": 176 },
+              { "x": 788, "y": 209 },
+              { "x": 768, "y": 253 },
+              { "x": 824, "y": 286 },
+              { "x": 820, "y": 291 }
+            ]
+          ],
+          "vexbot": [
+            {
+              "a": { "x": 65, "y": 197 },
+              "b": { "x": 640, "y": 879 },
+              "speed": 57
+            }
+          ]
+        }>)
+
+      "/mashbot?error=true" ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
     end
   end
 
