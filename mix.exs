@@ -17,7 +17,9 @@ defmodule Exnoops.MixProject do
     ]
   end
 
-  def description, do: "Github's Noop API client for Elixir"
+  def description() do
+    "Github's Noop API client for Elixir! Sample wrapping around the various Noop endpoints with minimal processing. Most processing converts dictionary objects to easier to parse tuples?"
+  end
 
   def package do
     [
