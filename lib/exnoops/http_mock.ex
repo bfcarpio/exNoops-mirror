@@ -613,6 +613,83 @@ defmodule Exnoops.API.HttpMock do
         mock_mojito(404, ~S/{
           "message": "The requested resource was not found"
         }/)
+
+      "/melodybot/random?error=true" ->
+        mock_mojito(404, ~S/{
+          "message": "The requested resource was not found"
+        }/)
+
+      "/melodybot/random" ->
+        mock_mojito(200, ~S<{
+          "generator": "chaos",
+          "stepCount": 32,
+          "key": {
+            "name": "A Major", "root": "A", "relativeMajorRoot": "A", "type": "major"
+          },
+          "notes": [
+            {
+              "start": 0,
+              "duration": 2,
+              "value": 64,
+              "name": "E4",
+              "noteName": "E",
+              "octave": 4,
+              "frequency": 329.6275569128699
+            },
+            {
+              "start": 2,
+              "duration": 1,
+              "value": 59,
+              "name": "B3",
+              "noteName": "B",
+              "octave": 3,
+              "frequency": 246.94165062806206
+            },
+            {
+              "start": 17,
+              "duration": 4,
+              "value": 74,
+              "name": "D5",
+              "noteName": "D",
+              "octave": 5,
+              "frequency": 587.3295358348151
+            },
+            {
+              "start": 25,
+              "duration": 4,
+              "value": 62,
+              "name": "D4",
+              "noteName": "D",
+              "octave": 4,
+              "frequency": 293.6647679174076
+            },
+            {
+              "start": 29,
+              "duration": 2,
+              "value": 57,
+              "name": "A3",
+              "noteName": "A",
+              "octave": 3,
+              "frequency": 220
+            },
+            {
+              "start": 31,
+              "duration": 1,
+              "value": 57,
+              "name": "A3",
+              "noteName": "A",
+              "octave": 3,
+              "frequency": 220
+            }
+          ]
+        }>)
+
+      "/melodybot/generators" ->
+        mock_mojito(200, ~S<[
+            { "name": "chaos", "description": "Chaotic Neutral Melody Generator" },
+            { "name": "arpeggio", "description": "Generate Arpeggios" },
+            { "name": "walk", "description": "Random Walk" }
+          ]>)
     end
   end
 
