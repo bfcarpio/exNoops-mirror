@@ -1,6 +1,6 @@
 defmodule Exnoops.Drumbot do
   @moduledoc """
-  Module to interactive with Github's Noop: Drumbot
+  Module to interact with Github's Noop: Drumbot
 
   See the [official `noop` documentation](https://noopschallenge.com/challenges/drumbot)
   """
