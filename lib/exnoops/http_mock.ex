@@ -32,6 +32,32 @@ defmodule Exnoops.API.HttpMock do
           ]
         }/)
 
+      "/hexbot?count=5&width=1000&height=1000" ->
+        mock_mojito(200, ~S/{
+          "colors":[
+            {
+              "value":"#2E84C5",
+              "coordinates":{"x":755,"y":331}
+            },
+            {
+              "value":"#116BAA",
+              "coordinates":{"x":52,"y":998}
+            },
+            {
+              "value":"#C742B2",
+              "coordinates":{"x":617,"y":478}
+            },
+            {
+              "value":"#4C2BB9",
+              "coordinates":{"x":13,"y":183}
+            },
+            {
+              "value":"#0C98FB",
+              "coordinates":{"x":604,"y":507}
+            }
+          ]
+        }/)
+
       "/drumbot/patterns" ->
         mock_mojito(200, ~S/[
           { "name": "oontza" },

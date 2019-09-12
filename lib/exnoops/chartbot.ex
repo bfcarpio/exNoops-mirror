@@ -1,6 +1,6 @@
 defmodule Exnoops.Chartbot do
   @moduledoc """
-  Module to interact with Github's Noop => Chartbot
+  Module to interact with Github's Noop: Chartbot
 
   See the [official `noop` documentation](https://noopschallenge.com/challenges/chartbot) for API information including the accepted parameters.
   """

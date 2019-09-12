@@ -18,6 +18,7 @@ defmodule Exnoops.Vexbot do
   ## Examples
 
       iex> Exnoops.Vexbot.get_vector()
+      # [{a_x, a_y}, {b_x, b_y}, speed]
       {:ok, [{{743, 147}, {60, 601}, 71}]}
 
       iex> Exnoops.Vexbot.get_vector(count: 2)

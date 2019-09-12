@@ -18,6 +18,7 @@ defmodule Exnoops.Polybot do
   ## Examples
 
       iex> Exnoops.Polybot.get_polygon()
+      # List of {x, y} points
       {:ok, [[{157, 998}, {145, 1000}, {122, 1000}, {106, 989}, {151, 972}]]}
   """
   @spec get_polygon(keyword()) :: {atom(), list(list())}

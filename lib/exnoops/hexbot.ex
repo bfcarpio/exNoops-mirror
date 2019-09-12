@@ -12,23 +12,32 @@ defmodule Exnoops.Hexbot do
 
   @doc """
   Query Hexbot for color(s)
-
-  + Parameters are sent with a keyword list into the function.
   + Parameters that accept multiple values should be put into the keyword list like `{:key, [value1, value2]}`. See example below.
 
   ## Examples
 
       iex> Exnoops.Hexbot.get_color()
-      {:ok, ["#18453B"]}
+      {:ok, [{"#18453B", nil}]}
 
       iex> Exnoops.Hexbot.get_color([count: 5, seed: ["FF7F50", "FFD700", "FF8C00"]])
       {:ok,
         [
-          "#FFBB19",
-          "#FF8A0E",
-          "#FF8628",
-          "#FF9E00",
-          "#FF8433"
+          {"#FFBB19", nil},
+          {"#FF8A0E", nil},
+          {"#FF8628", nil},
+          {"#FF9E00", nil},
+          {"#FF8433", nil}
+        ]
+      }
+
+      iex> Exnoops.Hexbot.get_color([count: 5, width: 1000, height: 1000])
+      {:ok,
+        [
+          {"#2E84C5", {755, 331}},
+          {"#116BAA", {52, 998}},
+          {"#C742B2", {617, 478}},
+          {"#4C2BB9", {13, 183}},
+          {"#0C98FB", {604, 507}}
         ]
       }
 
@@ -40,7 +49,12 @@ defmodule Exnoops.Hexbot do
 
     case get("/" <> @noop, opts) do
       {:ok, %{"colors" => values}} ->
-        {:ok, for(%{"value" => value} <- values, do: value)}
+        {:ok,
+         values
+         |> Enum.map(fn
+           %{"value" => value, "coordinates" => %{"x" => x, "y" => y}} -> {value, {x, y}}
+           %{"value" => value} -> {value, nil}
+         end)}
 
       error ->
         error
