@@ -31,18 +31,21 @@ defmodule Exnoops.Vexbot do
 
     case get("/" <> @noop, opts) do
       {:ok, %{"vectors" => vectors}} ->
-        {:ok,
-         for(
-           %{
-             "a" => %{"x" => a_x, "y" => a_y},
-             "b" => %{"x" => b_x, "y" => b_y},
-             "speed" => speed
-           } <- vectors,
-           do: {{a_x, a_y}, {b_x, b_y}, speed}
-         )}
+        {:ok, format_vectors(vectors)}
 
       error ->
         error
     end
+  end
+
+  def format_vectors(vectors) do
+    for(
+      %{
+        "a" => %{"x" => a_x, "y" => a_y},
+        "b" => %{"x" => b_x, "y" => b_y},
+        "speed" => speed
+      } <- vectors,
+      do: {{a_x, a_y}, {b_x, b_y}, speed}
+    )
   end
 end

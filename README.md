@@ -18,7 +18,7 @@ by adding `exnoops` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:exnoops, "~> 0.1.1"}
+    {:exnoops, "~> 0.1.2"}
   ]
 end
 ```

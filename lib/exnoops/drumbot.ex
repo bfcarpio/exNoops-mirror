@@ -37,7 +37,7 @@ defmodule Exnoops.Drumbot do
     Logger.debug("Calling Drumbot.get_patterns()")
 
     case get("/" <> @noop <> "/patterns", []) do
-      {:ok, [_h | _t] = res} ->
+      {:ok, res} when is_list(res) ->
         {:ok, for(%{"name" => value} <- res, do: value)}
 
       error ->

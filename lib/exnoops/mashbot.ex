@@ -1,12 +1,16 @@
 defmodule Exnoops.Mashbot do
   @moduledoc """
-  Module to interact with Github's Noop: Hexbot
+  Module to interact with Github's Noop: Mashbot
 
   See the [official `noop` documentation](https://noopschallenge.com/challenges/mashbot) for API information including the accepted parameters.
   """
 
   require Logger
   import Exnoops.API
+  import Exnoops.Vexbot, only: [format_vectors: 1]
+  import Exnoops.Polybot, only: [format_polygons: 1]
+  import Exnoops.Hexbot, only: [format_colors: 1]
+  import Exnoops.Directbot, only: [format_directions: 1]
 
   @noop "mashbot"
 
@@ -21,7 +25,7 @@ defmodule Exnoops.Mashbot do
       iex> Exnoops.Mashbot.query()
       {:ok, %{
         "hexbot" => [
-          "#E9B104"
+          {"#E9B104", nil}
         ],
         "directbot" => [
           { :right, 58, 7, nil }
@@ -76,56 +80,24 @@ defmodule Exnoops.Mashbot do
 
   defp mash_map_handler(res_map) when is_map(res_map) do
     res_map
-    |> Enum.map(&Task.async(fn -> mash_handler(&1) end))
-    |> Enum.map(&Task.await(&1))
+    |> Task.async_stream(&mash_handler/1)
+    |> Stream.map(fn {:ok, m} -> m end)
     |> Enum.into(%{})
   end
 
-  defp mash_handler({"hexbot" = noop, data}) do
-    {noop, for(%{"value" => value} <- data, do: value)}
+  defp mash_handler({"hexbot" = noop, colors}) do
+    {noop, format_colors(colors)}
   end
 
-  defp mash_handler({"directbot" = noop, data}) do
-    data
-    |> Enum.map(fn vector ->
-      vector
-      |> Enum.map(fn
-        {"coordinates", %{"a" => %{"x" => a_x, "y" => a_y}, "b" => %{"x" => b_x, "y" => b_y}}} ->
-          {"coordinates", {{a_x, a_y}, {b_x, b_y}}}
-
-        pair ->
-          pair
-      end)
-      |> Enum.into(%{})
-      |> Map.put_new("coordinates", nil)
-      |> (fn %{
-               "direction" => direction,
-               "distance" => distance,
-               "speed" => speed,
-               "coordinates" => coordinates
-             } ->
-            {String.to_atom(direction), distance, speed, coordinates}
-          end).()
-    end)
-    |> (fn new_data -> {noop, new_data} end).()
+  defp mash_handler({"directbot" = noop, directions}) do
+    {noop, format_directions(directions)}
   end
 
   defp mash_handler({"polybot" = noop, polygons}) do
-    Enum.map(polygons, fn polygon ->
-      for(%{"x" => x, "y" => y} <- polygon, do: {x, y})
-    end)
-    |> (fn new_data -> {noop, new_data} end).()
+    {noop, format_polygons(polygons)}
   end
 
   defp mash_handler({"vexbot" = noop, vectors}) do
-    for(
-      %{
-        "a" => %{"x" => a_x, "y" => a_y},
-        "b" => %{"x" => b_x, "y" => b_y},
-        "speed" => speed
-      } <- vectors,
-      do: {{a_x, a_y}, {b_x, b_y}, speed}
-    )
-    |> (fn new_data -> {noop, new_data} end).()
+    {noop, format_vectors(vectors)}
   end
 end
