@@ -23,18 +23,21 @@ defmodule Exnoops.Polybot do
   """
   @spec get_polygon(keyword()) :: {atom(), list(list())}
   def get_polygon(opts \\ []) when is_list(opts) do
-    Logger.debug("Calling Hexbot.get_color()")
+    Logger.debug("Calling Polybot.get_polygon()")
 
     case get("/" <> @noop, opts) do
       {:ok, %{"polygons" => polygons}} ->
-        {:ok,
-         for(
-           polygon <- polygons,
-           do: for(%{"x" => x, "y" => y} <- polygon, do: {x, y})
-         )}
+        {:ok, format_polygons(polygons)}
 
       error ->
         error
     end
+  end
+
+  def format_polygons(polygons) do
+    for(
+      polygon <- polygons,
+      do: for(%{"x" => x, "y" => y} <- polygon, do: {x, y})
+    )
   end
 end

@@ -48,16 +48,19 @@ defmodule Exnoops.Hexbot do
     Logger.debug("Calling Hexbot.get_color()")
 
     case get("/" <> @noop, opts) do
-      {:ok, %{"colors" => values}} ->
-        {:ok,
-         values
-         |> Enum.map(fn
-           %{"value" => value, "coordinates" => %{"x" => x, "y" => y}} -> {value, {x, y}}
-           %{"value" => value} -> {value, nil}
-         end)}
+      {:ok, %{"colors" => colors}} ->
+        {:ok, format_colors(colors)}
 
       error ->
         error
     end
+  end
+
+  def format_colors(colors) do
+    colors
+    |> Enum.map(fn
+      %{"value" => value, "coordinates" => %{"x" => x, "y" => y}} -> {value, {x, y}}
+      %{"value" => value} -> {value, nil}
+    end)
   end
 end

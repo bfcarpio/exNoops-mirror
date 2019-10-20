@@ -49,25 +49,24 @@ defmodule Exnoops.Directbot do
     Logger.debug("Calling Directbot.get_direction()")
 
     case get("/" <> @noop, opts) do
-      {:ok, %{"directions" => values}} ->
-        {:ok, Enum.map(values, &line_to_tuple(&1))}
+      {:ok, %{"directions" => directions}} ->
+        {:ok, format_directions(directions)}
 
       error ->
         error
     end
   end
 
+  def format_directions(directions) do
+    Enum.map(directions, &line_to_tuple/1)
+  end
+
   defp line_to_tuple(line_map) do
     line_map
-    |> Enum.map(fn
-      {"coordinates", %{"a" => %{"x" => a_x, "y" => a_y}, "b" => %{"x" => b_x, "y" => b_y}}} ->
-        {"coordinates", {{a_x, a_y}, {b_x, b_y}}}
-
-      pair ->
-        pair
+    |> Map.update("coordinates", nil, fn
+      %{"a" => %{"x" => a_x, "y" => a_y}, "b" => %{"x" => b_x, "y" => b_y}} ->
+        {{a_x, a_y}, {b_x, b_y}}
     end)
-    |> Enum.into(%{})
-    |> Map.put_new("coordinates", nil)
     |> (fn %{
              "direction" => direction,
              "distance" => distance,

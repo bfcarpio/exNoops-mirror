@@ -126,13 +126,12 @@ defmodule Exnoops.Chartbot do
     Logger.debug("Calling Chartbot.get_chart()")
 
     case get("/" <> @noop, opts) do
-      {:ok, %{"type" => "time"} = time_res} -> {:ok, reformat_time(time_res)}
-      {:ok, %{"type" => "pie"} = pie_res} -> {:ok, reformat_pie(pie_res)}
+      {:ok, %{"type" => _} = res} -> {:ok, reformat(res)}
       error -> error
     end
   end
 
-  defp reformat_time(time_res) when is_map(time_res) do
+  defp reformat(%{"type" => "time"} = time_res) do
     %{
       "title" => _,
       "interval" => _,
@@ -155,7 +154,7 @@ defmodule Exnoops.Chartbot do
     }
   end
 
-  defp reformat_pie(pie_res) when is_map(pie_res) do
+  defp reformat(%{"type" => "pie"} = pie_res) do
     %{
       "title" => _,
       "datasets" => datasets,
