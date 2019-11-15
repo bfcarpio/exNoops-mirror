@@ -105,8 +105,8 @@ defmodule Exnoops.Melodybot do
         %{ "name" => "walk", "description" => "Random Walk" }
       ]}
   """
-  @spec get_generators() :: {atom(), list()}
-  def get_generators() do
+  @spec get_generators :: {atom(), list()}
+  def get_generators do
     Logger.debug("Calling Melodybot.get_generators()")
 
     case get("/" <> @noop <> "/generators", []) do

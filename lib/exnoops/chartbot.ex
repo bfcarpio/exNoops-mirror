@@ -142,8 +142,7 @@ defmodule Exnoops.Chartbot do
 
     %{
       time_res
-      | # TODO: Cleanup / Optimize
-        "datasets" =>
+      | "datasets" =>
           Enum.map(datasets, fn %{"name" => _, "data" => data} = dataset ->
             %{
               dataset

@@ -21,8 +21,8 @@ defmodule Exnoops.Riddlebot do
         "exampleResponse" => %{ "login" => "noops-challenge" }
       }}
   """
-  @spec start() :: {atom(), map()}
-  def start() do
+  @spec start :: {atom(), map()}
+  def start do
     Logger.debug("Calling Riddlebot.start()")
 
     case get("/" <> @noop <> "/start", []) do
