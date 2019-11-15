@@ -44,7 +44,8 @@ defmodule Exnoops.MixProject do
       {:earmark, "~> 1.3.2", only: :dev},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
       {:mojito, "~> 0.3.0"},
-      {:json, "~> 1.3.0"}
+      {:json, "~> 1.3.0"},
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
 end

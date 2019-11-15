@@ -17,7 +17,8 @@ defmodule Exnoops.API do
     path = @base_url <> endpoint <> format_opts(opts)
     Logger.debug("Performing GET request on #{path}")
 
-    @http_impl.http_get(path)
+    path
+    |> @http_impl.http_get()
     |> handle_response
   end
 
@@ -26,7 +27,8 @@ defmodule Exnoops.API do
     path = @base_url <> endpoint
     Logger.debug("Performing POST request on #{path}")
 
-    @http_impl.http_post(path, JSON.encode!(body))
+    path
+    |> @http_impl.http_post(JSON.encode!(body))
     |> handle_response
   end
 

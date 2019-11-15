@@ -32,8 +32,8 @@ defmodule Exnoops.Drumbot do
       }
 
   """
-  @spec get_patterns() :: {atom(), list()}
-  def get_patterns() do
+  @spec get_patterns :: {atom(), list()}
+  def get_patterns do
     Logger.debug("Calling Drumbot.get_patterns()")
 
     case get("/" <> @noop <> "/patterns", []) do

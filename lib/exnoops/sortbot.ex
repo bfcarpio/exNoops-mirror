@@ -18,8 +18,8 @@ defmodule Exnoops.Sortbot do
       iex> Exnoops.Sortbot.welcome()
       {:ok, "Hello there, welcome to the Sortbot. Get started at /sortbot/exam"}
   """
-  @spec welcome() :: {atom(), String.t()}
-  def welcome() do
+  @spec welcome :: {atom(), String.t()}
+  def welcome do
     Logger.debug("Calling Sortbot.welcome()")
 
     case get("/" <> @noop, []) do

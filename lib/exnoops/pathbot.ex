@@ -26,8 +26,8 @@ defmodule Exnoops.Pathbot do
         "locationPath" => "/pathbot/rooms/LU62ZaD_SqudPvH3Qt3kJQ"
       }}
   """
-  @spec start() :: {atom(), map()}
-  def start() do
+  @spec start :: {atom(), map()}
+  def start do
     Logger.debug("Calling Pathbot.start()")
 
     case post("/" <> @noop <> "/start", []) do

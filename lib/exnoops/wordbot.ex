@@ -95,8 +95,8 @@ defmodule Exnoops.Wordbot do
           "wrestlers"
         ]}
   """
-  @spec get_word_sets() :: {atom(), list()}
-  def get_word_sets() do
+  @spec get_word_sets :: {atom(), list()}
+  def get_word_sets do
     Logger.debug("Calling Wordbot.get_word_sets()")
 
     case get("/" <> @noop <> "/sets", []) do
