@@ -45,35 +45,35 @@ compile:three_older:
 
 test:latest:
   image: elixir:alpine
-  <<: *compile_definition
+  <<: *test_definition
 
 test:one_older:
   image: elixir:1.9-alpine
-  <<: *compile_definition
+  <<: *test_definition
 
 test:two_older:
   image: elixir:1.8-alpine
-  <<: *compile_definition
+  <<: *test_definition
 
 test:three_older:
   image: elixir:1.7-alpine
-  <<: *compile_definition
+  <<: *test_definition
 
 lint:latest:
   image: elixir:alpine
-  <<: *compile_definition
+  <<: *lint_definition
 
 lint:one_older:
   image: elixir:1.9-alpine
-  <<: *compile_definition
+  <<: *lint_definition
 
 lint:two_older:
   image: elixir:1.8-alpine
-  <<: *compile_definition
+  <<: *lint_definition
 
 lint:three_older:
   image: elixir:1.7-alpine
-  <<: *compile_definition
+  <<: *lint_definition
 
 pages:
   stage: deploy
