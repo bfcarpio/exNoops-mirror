@@ -1,30 +1,78 @@
-image: elixir:1.9.0-alpine
 
 cache:
   paths:
     - _build
     - deps
 
-before_script:
-  - mix local.hex --force
-  - mix local.rebar --force
-  - mix deps.get
+default:
+  before_script:
+    - mix local.hex --force
+    - mix local.rebar --force
+    - mix deps.get
 
-compile:
+.compile_template: &compile_definition
   stage: build
   script:
     - mix compile --warnings-as-errors
 
-test:
+.test_template: &test_definition
   stage: test
   script:
     - mix test --cover
 
-lint:
+.lint_template: &lint_definition
   stage: test
   script:
     - mix format --check-formatted --check-equivalent
     - mix credo --strict
+
+compile:latest:
+  image: elixir:alpine
+  <<: *compile_definition
+
+compile:one_older:
+  image: elixir:1.9-alpine
+  <<: *compile_definition
+
+compile:two_older:
+  image: elixir:1.8-alpine
+  <<: *compile_definition
+
+compile:three_older:
+  image: elixir:1.7-alpine
+  <<: *compile_definition
+
+test:latest:
+  image: elixir:alpine
+  <<: *compile_definition
+
+test:one_older:
+  image: elixir:1.9-alpine
+  <<: *compile_definition
+
+test:two_older:
+  image: elixir:1.8-alpine
+  <<: *compile_definition
+
+test:three_older:
+  image: elixir:1.7-alpine
+  <<: *compile_definition
+
+lint:latest:
+  image: elixir:alpine
+  <<: *compile_definition
+
+lint:one_older:
+  image: elixir:1.9-alpine
+  <<: *compile_definition
+
+lint:two_older:
+  image: elixir:1.8-alpine
+  <<: *compile_definition
+
+lint:three_older:
+  image: elixir:1.7-alpine
+  <<: *compile_definition
 
 pages:
   stage: deploy
